@@ -1,0 +1,7 @@
+package com.project.onlinelearning.repository;
+
+import com.project.onlinelearning.model.Notification;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface NotificationRepository extends JpaRepository<Notification, Long> {
+}
