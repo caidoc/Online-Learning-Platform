@@ -15,8 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorFormula("case when department is not null then 'teacher' else 'student' end")
-@DiscriminatorValue("user")
+//@DiscriminatorFormula("case when department is not null then 'teacher' else 'student' end")
+//@DiscriminatorValue("user")
 public class  User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

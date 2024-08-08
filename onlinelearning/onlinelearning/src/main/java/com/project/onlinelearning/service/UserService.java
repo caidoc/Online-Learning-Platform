@@ -6,6 +6,7 @@ import com.project.onlinelearning.model.User;
 import com.project.onlinelearning.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,8 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-    public User save(User user) {
+    @Transactional
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
 

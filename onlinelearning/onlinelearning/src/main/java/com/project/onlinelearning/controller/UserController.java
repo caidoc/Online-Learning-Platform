@@ -54,16 +54,22 @@ public class UserController {
 //    public User createUser(@RequestBody User user) {
 //        return userService.save(user);
 //    }
+
     @PostMapping
-    public  ResponseEntity<User> createUser(@RequestBody User user) {
-        if (user instanceof Teacher) {
-            return ResponseEntity.ok(userService.save(user));
-        } else if (user instanceof Student) {
-            return ResponseEntity.ok(userService.save(user));
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User saveUser = userService.saveUser(user);
+        return ResponseEntity.ok(saveUser);
     }
+//    @PostMapping
+//    public  ResponseEntity<User> createUser(@RequestBody User user) {
+//        if (user instanceof Teacher) {
+//            return ResponseEntity.ok(userService.save(user));
+//        } else if (user instanceof Student) {
+//            return ResponseEntity.ok(userService.save(user));
+//        } else {
+//            return ResponseEntity.badRequest().build();
+//        }
+//    }
 
 //    @PutMapping("/{id}")
 //    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
@@ -93,7 +99,7 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
 
-        return ResponseEntity.ok(userService.save(existing));
+        return ResponseEntity.ok(userService.saveUser(existing));
     }
 
     @DeleteMapping("/{id}")
