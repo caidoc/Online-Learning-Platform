@@ -7,6 +7,7 @@ import com.project.onlinelearning.model.User;
 import com.project.onlinelearning.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,26 +51,38 @@ public class UserController {
         User user = userService.findByUsername(username);
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
-//    @PostMapping
-//    public User createUser(@RequestBody User user) {
-//        return userService.save(user);
+//    @PostMapping("/teachers")
+//    public ResponseEntity<User> createTeacher(@RequestBody Teacher teacher) {
+//        return ResponseEntity.ok(userService.saveTeacher(teacher));
+//    }
+//    @PostMapping("/students")
+//    public ResponseEntity<User> createStudent(@RequestBody Student student) {
+//        return ResponseEntity.ok(userService.saveStudent(student));
 //    }
 
-    @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User saveUser = userService.saveUser(user);
-        return ResponseEntity.ok(saveUser);
-    }
+
 //    @PostMapping
-//    public  ResponseEntity<User> createUser(@RequestBody User user) {
-//        if (user instanceof Teacher) {
-//            return ResponseEntity.ok(userService.save(user));
-//        } else if (user instanceof Student) {
-//            return ResponseEntity.ok(userService.save(user));
-//        } else {
-//            return ResponseEntity.badRequest().build();
-//        }
+//    public User createUser(@RequestBody User user) {
+//        return userService.saveUser(user);
 //    }
+
+//    @PostMapping
+//    public ResponseEntity<User> createUser(@RequestBody User user) {
+//        User saveUser = userService.saveUser(user);
+//        return ResponseEntity.ok(saveUser);
+//    }
+    @Transactional
+@PostMapping("/teachers")
+public ResponseEntity<User> createTeacher(@RequestBody Teacher teacher) {
+    Teacher saveTeacher = (Teacher) userService.saveUser(teacher);
+    return ResponseEntity.ok(saveTeacher);
+}
+    @Transactional
+    @PostMapping("/students")
+    public ResponseEntity<User> createStudent(@RequestBody Student student) {
+        Student saveStudent = (Student) userService.saveUser(student);
+        return ResponseEntity.ok(saveStudent);
+    }
 
 //    @PutMapping("/{id}")
 //    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {

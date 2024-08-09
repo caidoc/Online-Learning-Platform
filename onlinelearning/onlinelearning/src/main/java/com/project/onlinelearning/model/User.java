@@ -1,8 +1,5 @@
 package com.project.onlinelearning.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.*;
 import org.hibernate.annotations.DiscriminatorFormula;
 
@@ -10,13 +7,11 @@ import org.hibernate.annotations.DiscriminatorFormula;
 import javax.persistence.*;
 import java.util.List;
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
-//@DiscriminatorFormula("case when department is not null then 'teacher' else 'student' end")
-//@DiscriminatorValue("user")
 public class  User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

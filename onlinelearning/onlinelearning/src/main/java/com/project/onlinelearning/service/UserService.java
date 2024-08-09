@@ -28,8 +28,13 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+//    @Transactional
+//    public User saveUser(User user) {
+//        return userRepository.save(user);
+//    }
     @Transactional
     public User saveUser(User user) {
+        user.getCourses().forEach(course -> course.setTeacher((Teacher) user)); // Assign teacher to the course
         return userRepository.save(user);
     }
 

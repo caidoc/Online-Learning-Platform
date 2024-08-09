@@ -1,7 +1,6 @@
 package com.project.onlinelearning.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -26,7 +25,6 @@ public class Course {
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     @JsonIgnore
-//    @JsonBackReference
-    private User teacher;
+    private Teacher teacher;
 
 }
